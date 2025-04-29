@@ -1,17 +1,188 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    /* style your login pages here because the normal
-      static asset flow is different now */
+    @font-face {
+      font-family: 'DM Serif Text';
+      src: url("{% static 'DM_Serif_Text/DMSerifText-Regular.ttf' %}") format('truetype');
+      font-style: normal;
+      font-weight: normal;
+    }
+
+    @font-face {
+      font-family: 'DM Serif Italic';
+      src: url("{% static 'DM_Serif_Text/DMSerifText-Italic.ttf' %}") format('truetype');
+      font-style: italic;
+      font-weight: normal;
+    }
+
+    @font-face {
+      font-family: 'Hind Madurai';
+      src: url("../fonts/Hind_Madurai/HindMadurai-Regular.ttf") format('truetype');
+      font-style: normal;
+      font-weight: normal;
+    }
+
+
+    body {
+      font-family: 'Hind Madurai', Arial, sans-serif;
+    }
+
+    :root {
+      font-family: Hind Madurai;
+      line-height: 1.5;
+      font-weight: 400;
+
+      color-scheme: light;
+      background-color: #eaf0ee;
+      --dark: rgba(29, 25, 41);
+      color: --dark;
+
+      font-synthesis: none;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    a,
+    p {
+      font-weight: 500;
+      color: #242424;
+      text-decoration: inherit;
+    }
+
+    a:hover {
+      color: #374337;
+    }
+
+    body {
+      margin: 0;
+      display: flex;
+      place-items: center;
+      min-width: 320px;
+      min-height: 100vh;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: DMSerifItalic, sans-serif;
+      font-size: 3.2em;
+      line-height: 1.1;
+      margin: .3em;
+      padding: 0;
+      color: var(--dark);
+
+    }
+
+    button,
+    a {
+      border-radius: 8px;
+      border: 1px solid transparent;
+      margin: .3em;
+      padding: 0.6em .6em;
+      font-size: 1.5em;
+      font-weight: 500;
+      font-family: inherit;
+      background-color: inherit;
+      cursor: pointer;
+      transition: background-color 0.15s;
+    }
+
+    button:hover,
+    a:hover {
+      background-color: #d1e0db;
+    }
+
+    button:focus,
+    button:focus-visible {
+      outline: 4px auto -webkit-focus-ring-color;
+    }
+
+    input {
+      font-family: inherit;
+      font-size: 1em;
+      padding: 0.6em .6em;
+      border-radius: 8px;
+      background-color: white;
+      border: none;
+      margin: .3em;
+    }
+
+    input:focus {
+      background-color: white;
+      box-shadow: 0 0 0 3px rgba(145, 194, 167, 0.5);
+    }
+
+    #root {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-row {
+      flex-direction: row;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .align-center {
+      align-items: center;
+    }
+
+    .navigation-banner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 120px;
+      background-color: #a6c1b8;
+      box-sizing: border-box;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+
+    #page {
+      position: absolute;
+      left: 120px;
+      right: 120px;
+      bottom: 0;
+      top: 0;
+      overflow: auto;
+      z-index: 5;
+    }
   </style>
 </head>
+
 <body>
-  {% block content %}
-  {% endblock %}
+  <div className="navigation-banner flex flex-row justify-between">
+    <!-- <h1>Wedding Planner</h1> -->
+  </div>
+  <div id="page">
+    {% block content %}
+    {% endblock %}
+  </div>
 </body>
+
 </html>

@@ -1,0 +1,27 @@
+.container {
+    margin: 5%;
+    width: 400px;
+    height: auto;
+    overflow: auto;
+    font-size: 1.25em;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: flex-start;
+    
+}
+
+.container-list {
+    padding-top: 20px;
+    padding-bottom: 70px;
+}
+
+.display-guest {
+    height: auto;
+    font-size: .8em;
+}
+
+.guest-list-item {
+    width: 90%;
+    border-bottom: 1px solid #ccc;
+}

@@ -1,9 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './App.css';
+import { useEffect, useRef, useState } from 'react';
 
 function App() {
-  // const [page, setPage] = useState("overview"); // use overview by default
+  const navbarRef = useRef(null);
+  const [navbar, setNavbar] = useState(0);
 
   async function logout() {
     const res = await fetch("/registration/logout/", {
@@ -18,10 +20,24 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    const updateNavbarHeight = () => {
+      if (navbarRef.current) {
+        const height = navbarRef.current.offsetHeight;
+        setNavbar(height);
+        document.getElementById('page').style.marginTop = `${height}px`;
+      }
+    };
+    updateNavbarHeight(); // Set initial height
+    window.addEventListener('resize', updateNavbarHeight);
+    return () => {
+      window.removeEventListener('resize', updateNavbarHeight);
+    };
+  }, []);
 
   return (
     <>
-      <div className="navigation-banner">
+      <div className="navigation-banner" ref={navbarRef}>
         <div className='flex flex-row justify-between'>
           <h1>Wedding Planner</h1>
           <div className="flex flex-row justify-between align-center">
@@ -37,6 +53,7 @@ function App() {
       <div id="page">
         <Outlet />
       </div>
+
     </>
   )
 }

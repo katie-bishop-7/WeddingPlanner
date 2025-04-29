@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.http import JsonResponse
+from core.models import Wedding
 
 # Create your views here.
 def sign_up(req):
@@ -14,6 +15,17 @@ def sign_up(req):
             last_name=req.POST.get("last_name")
         )
         login(req, user)
+
+        wedding = Wedding.objects.create(
+            user = user,
+            date = None,
+            location = None,
+            theme = None,
+            guest_count = 0,
+            budget = 0.00
+        )
+        wedding.save()
+
         return redirect("/")
     else:
         return render(req, "registration/sign_up.html")

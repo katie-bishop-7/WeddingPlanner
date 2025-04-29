@@ -1,30 +1,21 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# User for authentication and login
-
-class User(models.Model):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
-    username = models.CharField(max_length=150, unique=True)
-    email = models.EmailField(unique=True)
-    password = models.CharField(max_length=128)
-
-    def __str__(self):
-        return self.username
-    
 # Wedding model one-to-one relationship with User model
 
 class Wedding(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='wedding')
-    date = models.DateField()
-    location = models.CharField(max_length=255)
-    theme = models.CharField(max_length=100, blank=True, null=True)
+    id = models.AutoField(primary_key=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="wedding")
+    date = models.DateField(null=True, blank=True)
+    location = models.CharField(max_length=255, null=True, blank=True)
+    theme = models.CharField(max_length=255, null=True, blank=True)
     guest_count = models.PositiveIntegerField(default=0)
     budget = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
 # Guest model many-to-one relationship with Wedding model
     
 class Guest(models.Model):
+    id = models.AutoField(primary_key=True)
     wedding = models.ForeignKey(Wedding, on_delete=models.CASCADE, related_name='guests')
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -39,6 +30,7 @@ class Guest(models.Model):
 # BudgetItem model many-to-one relationship with Wedding model
     
 class BudgetItem(models.Model):
+    id = models.AutoField(primary_key=True)
     wedding = models.ForeignKey(Wedding, on_delete=models.CASCADE, related_name='budget_items')
     name = models.CharField(max_length=100)
     cost = models.DecimalField(max_digits=10, decimal_places=2)
@@ -53,6 +45,7 @@ class BudgetItem(models.Model):
 # Task model many-to-one relationship with Wedding model
     
 class Task(models.Model):
+    id = models.AutoField(primary_key=True)
     wedding = models.ForeignKey(Wedding, on_delete=models.CASCADE, related_name='tasks')
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
